@@ -1,4 +1,4 @@
-# 🎾 Vamos Arena – Digital Padel Booking System
+# 🎾 Vamos Arena / Digital Padel Booking System
 **[Live Official Website ↗](https://vamos-arena-indo.vercel.app/)**
 
 *Note: This repository is an architectural showcase and case study. The actual source code is proprietary and owned by the client, so this repo serves to document the system design, features, and technical workflows.*
