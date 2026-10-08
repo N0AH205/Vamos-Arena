@@ -104,28 +104,26 @@ sequenceDiagram
 ## Visual Walkthrough
 
 ### 1. Landing Page & Court Reservation
-A premium, dark-themed interface with vibrant neon accents and a custom grid layout. Includes an interactive calendar to select dates.
-![Landing Page Screenshot](assets/landing.png)
-
+![Landing Page Screenshot](assets/5.png)
 ### 2. Facilities Showcase
-Beautifully displays the high-end premium facilities of the Arena.
-![Facilities Page Screenshot](assets/facilities.png)
+Displays the facilities of the Arena.
+![Facilities Page Screenshot](assets/4.png)
 
 ### 3. Court Detail slots grid
 Shows live-synced reservation slots. Red slots indicate court bookings already verified or under review.
-![Court Slots Screenshot](assets/court_details.png)
+![Court Slots Screenshot](assets/3.png)
 
 ### 4. Custom Checkout & Payment Upload
 Fully functional payment verification flow. Features input fields for PIC details, WhatsApp connection, and receipt screenshot upload.
-![Checkout Page Screenshot](assets/checkout.png)
+![Checkout Page Screenshot](assets/2.png)
 
 ### 5. Access Ticket & Code Delivery
 Unique 5-digit alpha-numeric ticket generation. Displayed clearly for the receptionist to verify arrival.
-![Success Page Screenshot](assets/success.png)
+![Success Page Screenshot](assets/6.png)
 
 ### 6. Receptionist Desk (Admin Control Panel)
 Allows the arena staff to view all bookings in real time, search for codes/names, view receipt screenshots, and verify payments.
-![Admin Desk Page Screenshot](assets/admin_desk.png)
+![Admin Desk Page Screenshot](assets/1.png)
 
 ---
 
