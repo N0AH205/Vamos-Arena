@@ -1,6 +1,7 @@
-# 🎾 Vamos Arena – Digital Padel & Arena Booking System
+# 🎾 Vamos Arena – Digital Padel Booking System
+**[Live Official Website ↗](https://vamos-arena-indo.vercel.app/)**
 
-Welcome to the **Vamos Arena** showcase repository. This repository is dedicated to presenting the design, features, architecture, and live flows of the **Vamos Arena** digital platform, while keeping the proprietary client codebase private.
+*Note: This repository is an architectural showcase and case study. The actual source code is proprietary and owned by the client, so this repo serves to document the system design, features, and technical workflows.*
 
 [![License](https://img.shields.io/badge/License-Proprietary-red.svg)](#)
 [![Next.js](https://img.shields.io/badge/Framework-Next.js%2016-black.svg?style=flat&logo=next.js)](https://nextjs.org/)
@@ -9,25 +10,23 @@ Welcome to the **Vamos Arena** showcase repository. This repository is dedicated
 
 ---
 
-## 📖 Overview
+## Overview
 
-**Vamos Arena** is a modern, high-performance web application designed for a premium Padel tennis facility. It features an aesthetic, neo-brutalist dark-themed design and streamlines arena operations, court bookings, facility previews, and booking verifications. 
-
-To keep operational overhead and server maintenance costs at **zero**, Vamos Arena is built on a **fully serverless architecture** that leverages **Google Sheets** as a real-time database, communicating via a **Google Apps Script web service gateway**.
+**Vamos Arena** is web application designed for a premium Padel tennis facility that streamlines arena operations, court bookings, facility previews, and booking verifications. 
 
 ---
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 - **Frontend Framework:** Next.js (App Router, React 19, TypeScript)
-- **Styling:** Tailwind CSS (v4) with high-contrast, modern custom design tokens (Neo-Brutalist elements, neon accents)
+- **Styling:** Tailwind CSS
 - **State & Routing:** Next.js Server & Client components, local storage session persistence
 - **Backend / Database:** Serverless Google Apps Script API acting as a database router and file storage
 - **Data Persistence:** Google Sheets (real-time booking ledger) + Google Drive (receipt image storage)
 
 ---
 
-## 📐 System Architecture
+## System Architecture
 
 ### Component Diagram
 ```mermaid
@@ -92,7 +91,7 @@ sequenceDiagram
 
 ---
 
-## ⚡ Key Features
+## Key Features
 
 1. **Interactive Padel Calendar & Availability Grid**: Displays 31 rolling booking days starting from a configurable local window, updating the number of remaining spots dynamically.
 2. **Double-Session Courts System**: Supports **Center Court** and **Courts 1-9** with 9 set two-hour daily time slots.
@@ -102,7 +101,7 @@ sequenceDiagram
 
 ---
 
-## 🖼️ Visual Walkthrough
+## Visual Walkthrough
 
 ### 1. Landing Page & Court Reservation
 A premium, dark-themed interface with vibrant neon accents and a custom grid layout. Includes an interactive calendar to select dates.
@@ -130,85 +129,7 @@ Allows the arena staff to view all bookings in real time, search for codes/names
 
 ---
 
-## 🚀 How It Works (Development Environment Guide)
-
-If you are modifying this type of serverless project, here is how you can set up a local replica.
-
-### 📋 Prerequisites
-- [Node.js](https://nodejs.org/) (v20+ recommended)
-- A Google Account (for Google Sheets & Apps Script setup)
-
-### 🚀 Getting Started
-
-1. **Install Dependencies**:
-   ```bash
-   npm install
-   ```
-
-2. **Configure Google Apps Script**:
-   Create a Google Apps Script in your Google Drive and bind it to a spreadsheet. Paste the Apps Script handler code (sample structure below):
-   ```javascript
-   function doGet(e) {
-     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-     var data = sheet.getDataRange().getValues();
-     var headers = data[0];
-     var list = [];
-     for(var i = 1; i < data.length; i++) {
-       var row = {};
-       for(var j = 0; j < headers.length; j++) {
-         row[headers[j]] = data[i][j];
-       }
-       list.push(row);
-     }
-     return ContentService.createTextOutput(JSON.stringify(list))
-       .setMimeType(ContentService.MimeType.JSON);
-   }
-
-   function doPost(e) {
-     var params = JSON.parse(e.postData.contents);
-     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-     
-     // Handle base64 receipt upload (store file in Google Drive)
-     var fileUrl = "";
-     if (params.imageBase64) {
-       var folder = DriveApp.getFolderById("YOUR_GOOGLE_DRIVE_FOLDER_ID");
-       var file = folder.createFile(Utilities.newBlob(Utilities.base64Decode(params.imageBase64), params.mimeType, params.fileName));
-       fileUrl = file.getUrl();
-     }
-
-     sheet.appendRow([
-       params.uniqueCode,
-       params.picName,
-       params.picWa,
-       params.clubName,
-       params.clubIg,
-       params.reclubLink,
-       params.totalMember,
-       params.rekNumber,
-       params.date,
-       params.court,
-       params.time,
-       fileUrl,
-       "PENDING VERIFICATION"
-     ]);
-     return ContentService.createTextOutput(JSON.stringify({status: "success"}))
-       .setMimeType(ContentService.MimeType.JSON);
-   }
-   ```
-   Deploy this Apps Script web app with access set to "Anyone" and copy the Web App URL.
-
-3. **Update Next.js config**:
-   Replace the API endpoints in `src/app/page.tsx`, `src/app/court/[id]/page.tsx`, `src/app/checkout/page.tsx`, and `src/app/admin/page.tsx` with your deployed Apps Script web app URL.
-
-4. **Run Dev Mode**:
-   ```bash
-   npm run dev
-   ```
-   Open [http://localhost:3000](http://localhost:3000) to view and test the application.
-
----
-
-## 🔒 Confidentiality Notice
+## Confidentiality Notice
 
 This repository contains **only presentation materials** and documentation for showcase purposes. No proprietary source code is hosted here. Copying, distributing, or attempting to decompile this system without authorization is strictly prohibited.
 
