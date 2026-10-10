@@ -23,7 +23,7 @@
 
 ## Overview
 
-**Vamos Arena** is a web application designed for a premium Padel tennis facility that streamlines arena operations, court bookings, facility previews, and booking verifications.
+**Vamos Arena** is a web application designed for a Padel tennis facility that streamlines arena operations, court bookings, facility previews, and booking verifications.
 
 ---
 
